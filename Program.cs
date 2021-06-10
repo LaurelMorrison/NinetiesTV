@@ -173,19 +173,21 @@ namespace NinetiesTV
         static Show WordieastName(List<Show> shows)
         {
 
-            return shows.OrderByDescending(s => s.Name.Count(Char.IsWhiteSpace)).FirstOrDefault();
+            return shows.OrderByDescending(s => s.Name.Split(" ").Count()).FirstOrDefault();
         }
 
         // 22. Return the names of all shows as a single string seperated by a comma and a space.
         static string AllNamesWithCommas(List<Show> shows)
         {
-            throw new NotImplementedException();
+            return string.Join(", ", shows.Select(s => s.Name));
         }
 
         // 23. Do the same as above, but put the word "and" between the second-to-last and last show name.
         static string AllNamesWithCommasPlsAnd(List<Show> shows)
         {
-            throw new NotImplementedException();
+            string ShowList = string.Join(", ", shows.Select(s => s.Name).OrderByDescending(s => s).Skip(1));
+            string Last = string.Join(", ", shows.Select(s => s.Name).OrderByDescending(s => s).Take(1));
+            return (ShowList + " and " + Last);
         }
 
 
